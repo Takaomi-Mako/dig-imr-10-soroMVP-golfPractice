@@ -34,7 +34,6 @@ app.get("/api/improve", async (req, res) => {
     .select("practice.date", "practice.club", "miss.miss")
     .from("practice")
     .innerJoin("miss", "practice.id", "miss.practice_id");
-  console.log(item);
   const practiceResult = {
     ドライバー: { スライス: 0, フック: 0, トップ: 0, ダフリ: 0, 当たり薄い: 0 },
     "5番ウッド": {
@@ -101,8 +100,6 @@ app.get("/api/improve", async (req, res) => {
     }
   });
 
-  console.log(practiceResult);
-
   const result = Object.fromEntries(
     Object.entries(practiceResult).map(([club, miss]) => {
       const list = Object.entries(miss);
@@ -118,8 +115,6 @@ app.get("/api/improve", async (req, res) => {
       return [club, type];
     }),
   );
-
-  console.log(result);
 
   res.send(practiceResult);
 });
