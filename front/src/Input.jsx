@@ -60,7 +60,7 @@ export default function Input() {
   return (
     <form>
       <div>
-        <TextField type="date" ref={day} />
+        <TextField type="date" inputref={day} />
       </div>
       <div>
         <TextField
