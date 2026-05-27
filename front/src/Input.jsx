@@ -3,6 +3,9 @@ import {
   TextField,
   ToggleButtonGroup,
   ToggleButton,
+  Select,
+  MenuItem,
+  Button,
 } from "@mui/material";
 import { useState, useRef } from "react";
 
@@ -54,90 +57,37 @@ export default function Input() {
     });
   };
 
-  // const handle = (e) => {
-  //   const fa = [...missForm.miss];
-  //   e.target.checked
-  //     ? fa.push(e.target.value)
-  //     : fa.splice(fa.indexOf(e.target.value), 1);
-
-  //   setMissForm({
-  //     miss: fa,
-  //   });
-  //   console.log(missForm);
-  // };
-
   return (
     <form>
       <div>
-        <label> 入力日</label>
-        <input type="date" ref={day} />
+        <TextField type="date" ref={day} />
       </div>
       <div>
-        <label>クラブ</label>
-        <select ref={club}>
-          <option></option>
-          <option>ドライバー</option>
-          <option>5番ウッド</option>
-          <option>6番アイアン</option>
-          <option>7番アイアン</option>
-          <option>8番アイアン</option>
-          <option>9番アイアン</option>
-          <option>ピッチングウェッジ</option>
-          <option>アプローチウェッジ</option>
-          <option>サンドウェッジ</option>
-        </select>
+        <TextField
+          select
+          defaultValue=""
+          label="使用クラブ"
+          inputRef={club}
+          fullWidth
+        >
+          <MenuItem value="ドライバー">ドライバー</MenuItem>
+          <MenuItem value="5番ウッド">5番ウッド</MenuItem>
+          <MenuItem value="6番アイアン">6番アイアン</MenuItem>
+          <MenuItem value="7番アイアン">7番アイアン</MenuItem>
+          <MenuItem value="8番アイアン">8番アイアン</MenuItem>
+          <MenuItem value="9番アイアン">9番アイアン</MenuItem>
+          <MenuItem value="ピッチングウェッジ">ピッチングウェッジ</MenuItem>
+          <MenuItem value="アプローチウェッジ">アプローチウェッジ</MenuItem>
+          <MenuItem value="サンドウェッジ">サンドウェッジ</MenuItem>
+        </TextField>
       </div>
       <div>
         <TextField label="打った球数" type="number" inputRef={amount} />
-        {/* <input type="number" ref={amount} /> */}
       </div>
       <div>
         <TextField label="意識したこと" type="text" inputRef={intention} />
-        {/* <label>意識したこと</label>
-        <input type="text" ref={intention} /> */}
       </div>
-      {/* <div>
-        <fieldset>
-          <legend>ミス</legend>
-          <label>スライス</label>
-          <Checkbox
-            value="スライス"
-            // onChange={handle}
-            checked={missForm.miss.includes("スライス")}
-          />
-          <label>フック</label>
-          <Checkbox
-            value="フック"
-            onChange={handle}
-            checked={missForm.miss.includes("フック")}
-          />
-          <br />
-          <label>トップ</label>
-          <input
-            type="checkbox"
-            value="トップ"
-            onChange={handle}
-            checked={missForm.miss.includes("トップ")}
-          />
-          <br />
-          <label>ダフリ</label>
-          <input
-            type="checkbox"
-            value="ダフリ"
-            onChange={handle}
-            checked={missForm.miss.includes("ダフリ")}
-          />
-          <br />
-          <label>当たり薄い</label>
-          <input
-            type="checkbox"
-            value="当たり薄い"
-            onChange={handle}
-            checked={missForm.miss.includes("当たり薄い")}
-          />
-        </fieldset>
-      </div> */}
-      <>
+      <div>
         <ToggleButtonGroup value={formats} onChange={handleFormat}>
           <ToggleButton value="スライス">スライス</ToggleButton>
           <ToggleButton value="フック">フック</ToggleButton>
@@ -145,11 +95,11 @@ export default function Input() {
           <ToggleButton value="ダフリ">ダフリ</ToggleButton>
           <ToggleButton value="当たり薄い">当たり薄い</ToggleButton>
         </ToggleButtonGroup>
-      </>
+      </div>
       <div>
-        <button type="button" onClick={input}>
+        <Button variant="contained" color="success" onClick={input}>
           入力する
-        </button>
+        </Button>
       </div>
     </form>
   );
