@@ -1,3 +1,9 @@
+import {
+  Checkbox,
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton,
+} from "@mui/material";
 import { useState, useRef } from "react";
 
 export default function Input() {
@@ -8,6 +14,13 @@ export default function Input() {
   const [missForm, setMissForm] = useState({
     miss: [],
   });
+  const [formats, setFormats] = useState(null);
+
+  const handleFormat = (_, newValue) => {
+    setFormats(newValue);
+    setMissForm({ miss: newValue });
+  };
+
   const input = async () => {
     const data = {
       date: day.current.value,
@@ -34,21 +47,24 @@ export default function Input() {
     amount.current.value = "";
     intention.current.value = "";
 
+    setFormats(null);
+
     setMissForm({
       miss: [],
     });
   };
 
-  const handle = (e) => {
-    const fa = [...missForm.miss];
-    e.target.checked
-      ? fa.push(e.target.value)
-      : fa.splice(fa.indexOf(e.target.value), 1);
+  // const handle = (e) => {
+  //   const fa = [...missForm.miss];
+  //   e.target.checked
+  //     ? fa.push(e.target.value)
+  //     : fa.splice(fa.indexOf(e.target.value), 1);
 
-    setMissForm({
-      miss: fa,
-    });
-  };
+  //   setMissForm({
+  //     miss: fa,
+  //   });
+  //   console.log(missForm);
+  // };
 
   return (
     <form>
@@ -72,27 +88,25 @@ export default function Input() {
         </select>
       </div>
       <div>
-        <label>打った球数</label>
-        <input type="number" ref={amount} />
+        <TextField label="打った球数" type="number" inputRef={amount} />
+        {/* <input type="number" ref={amount} /> */}
       </div>
       <div>
-        <label>意識したこと</label>
-        <input type="text" ref={intention} />
+        <TextField label="意識したこと" type="text" inputRef={intention} />
+        {/* <label>意識したこと</label>
+        <input type="text" ref={intention} /> */}
       </div>
-      <div>
+      {/* <div>
         <fieldset>
           <legend>ミス</legend>
           <label>スライス</label>
-          <input
-            type="checkbox"
+          <Checkbox
             value="スライス"
-            onChange={handle}
+            // onChange={handle}
             checked={missForm.miss.includes("スライス")}
           />
-          <br />
           <label>フック</label>
-          <input
-            type="checkbox"
+          <Checkbox
             value="フック"
             onChange={handle}
             checked={missForm.miss.includes("フック")}
@@ -122,7 +136,16 @@ export default function Input() {
             checked={missForm.miss.includes("当たり薄い")}
           />
         </fieldset>
-      </div>
+      </div> */}
+      <>
+        <ToggleButtonGroup value={formats} onChange={handleFormat}>
+          <ToggleButton value="スライス">スライス</ToggleButton>
+          <ToggleButton value="フック">フック</ToggleButton>
+          <ToggleButton value="トップ">トップ</ToggleButton>
+          <ToggleButton value="ダフリ">ダフリ</ToggleButton>
+          <ToggleButton value="当たり薄い">当たり薄い</ToggleButton>
+        </ToggleButtonGroup>
+      </>
       <div>
         <button type="button" onClick={input}>
           入力する

@@ -23,9 +23,9 @@ app.post("/api/input", async (req, res) => {
       practice_id: insertPracticeData[0].id,
       miss: ele,
     };
-    await knex("miss").insert(missData, ["*"]);
+    const result = await knex("miss").insert(missData, ["*"]);
+    console.log(result);
   }
-
   res.send("OK");
 });
 

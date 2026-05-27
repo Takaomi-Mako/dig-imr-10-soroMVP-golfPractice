@@ -1,10 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Page1 from "./pages/Page1.jsx";
-import Page2 from "./pages/Page2.jsx";
 import Input from "./Input.jsx";
 import Initial from "./Initial.jsx";
+import MuiTest from "./muiTest.jsx";
 
 function App() {
   return (
@@ -25,6 +24,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    // <MuiTest />
   );
 }
 

@@ -16,7 +16,6 @@ export default function Improve() {
       try {
         const response = await fetch("/api/improve");
         const data = await response.json();
-        console.log(data);
         data["ドライバー"] === "ノーミス"
           ? setDriver("ドライバーはいい感じ!")
           : setDriver(`ドライバーのミスは ${data["ドライバー"]} 💦`);
