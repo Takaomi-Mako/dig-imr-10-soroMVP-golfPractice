@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Improve from "./improve.jsx";
+import Improve from "./Improve.jsx";
 export default function () {
   return (
     <>
