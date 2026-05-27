@@ -1,0 +1,28 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public",
+    "db:migrate": "knex migrate:latest --",
+    "db:migrate-make": "knex migrate:make",
+    "db:seed": "knex seed:run",
+    "db:seed-make": "knex seed:make",
+    "db:reset": "knex migrate:rollback --all && knex migrate:latest && knex seed:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "knex": "^3.2.10",
+    "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
