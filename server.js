@@ -94,6 +94,7 @@ app.get("/api/improve", async (req, res) => {
       当たり薄い: 0,
     },
   };
+
   item.forEach((ele) => {
     for (const club in practiceResult) {
       if (ele.club === club) practiceResult[club][ele.miss]++;
@@ -120,7 +121,7 @@ app.get("/api/improve", async (req, res) => {
 
   console.log(result);
 
-  res.send(result);
+  res.send(practiceResult);
 });
 
 app.listen(PORT, () => {

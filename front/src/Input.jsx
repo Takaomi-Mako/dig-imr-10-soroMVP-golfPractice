@@ -6,18 +6,31 @@ import {
   Select,
   MenuItem,
   Button,
+  Box,
+  Stack,
 } from "@mui/material";
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function Input() {
-  const day = useRef(null);
-  const club = useRef(null);
-  const amount = useRef(null);
-  const intention = useRef(null);
+  const today = new Date();
+  const formatted = today
+    .toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .split("/")
+    .join("-");
+
+  const day = useRef("");
+  const [club, setClub] = useState("");
+  const amount = useRef("");
+  const intention = useRef("");
   const [missForm, setMissForm] = useState({
     miss: [],
   });
-  const [formats, setFormats] = useState(null);
+  const [formats, setFormats] = useState("");
 
   const handleFormat = (_, newValue) => {
     setFormats(newValue);
@@ -27,7 +40,7 @@ export default function Input() {
   const input = async () => {
     const data = {
       date: day.current.value,
-      club: club.current.value,
+      club: club,
       amount: amount.current.value,
       intention: intention.current.value,
       miss: missForm.miss,
@@ -46,7 +59,7 @@ export default function Input() {
     }
 
     day.current.value = "";
-    club.current.value = "";
+    setClub("");
     amount.current.value = "";
     intention.current.value = "";
 
@@ -58,17 +71,22 @@ export default function Input() {
   };
 
   return (
-    <form>
-      <div>
-        <TextField type="date" inputref={day} />
-      </div>
-      <div>
+    <Stack spacing={8} direction="column">
+      <Box>
+        <TextField
+          type="date"
+          inputRef={day}
+          sx={{ width: "500px" }}
+          defaultValue={formatted}
+        />
+      </Box>
+      <Box>
         <TextField
           select
-          defaultValue=""
+          value={club}
           label="使用クラブ"
-          inputRef={club}
-          fullWidth
+          onChange={(e) => setClub(e.target.value)}
+          sx={{ width: "500px" }}
         >
           <MenuItem value="ドライバー">ドライバー</MenuItem>
           <MenuItem value="5番ウッド">5番ウッド</MenuItem>
@@ -80,27 +98,67 @@ export default function Input() {
           <MenuItem value="アプローチウェッジ">アプローチウェッジ</MenuItem>
           <MenuItem value="サンドウェッジ">サンドウェッジ</MenuItem>
         </TextField>
-      </div>
-      <div>
-        <TextField label="打った球数" type="number" inputRef={amount} />
-      </div>
-      <div>
-        <TextField label="意識したこと" type="text" inputRef={intention} />
-      </div>
-      <div>
-        <ToggleButtonGroup value={formats} onChange={handleFormat}>
-          <ToggleButton value="スライス">スライス</ToggleButton>
-          <ToggleButton value="フック">フック</ToggleButton>
-          <ToggleButton value="トップ">トップ</ToggleButton>
-          <ToggleButton value="ダフリ">ダフリ</ToggleButton>
-          <ToggleButton value="当たり薄い">当たり薄い</ToggleButton>
+      </Box>
+      <Box>
+        <TextField
+          label="打った球数"
+          type="number"
+          inputRef={amount}
+          sx={{ width: "500px" }}
+        />
+      </Box>
+      <Box>
+        <TextField
+          label="意識したこと"
+          type="text"
+          inputRef={intention}
+          sx={{ width: "500px" }}
+        />
+      </Box>
+      <Box>
+        <ToggleButtonGroup
+          value={formats}
+          onChange={handleFormat}
+          sx={{ width: "500px" }}
+        >
+          <ToggleButton value="スライス" sx={{ width: "20%" }}>
+            スライス
+          </ToggleButton>
+          <ToggleButton value="フック" sx={{ width: "20%" }}>
+            フック
+          </ToggleButton>
+          <ToggleButton value="トップ" sx={{ width: "20%" }}>
+            トップ
+          </ToggleButton>
+          <ToggleButton value="ダフリ" sx={{ width: "20%" }}>
+            ダフリ
+          </ToggleButton>
+          <ToggleButton value="当たり薄い" sx={{ width: "20%" }}>
+            当たり薄い
+          </ToggleButton>
         </ToggleButtonGroup>
-      </div>
-      <div>
-        <Button variant="contained" color="success" onClick={input}>
+      </Box>
+      <Box>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={input}
+          sx={{ width: "500px" }}
+        >
           入力する
         </Button>
-      </div>
-    </form>
+      </Box>
+      <Box>
+        <Button
+          component={Link}
+          to="/initial"
+          variant="contained"
+          color="secoundry"
+          sx={{ width: "500px" }}
+        >
+          初期画面へ
+        </Button>
+      </Box>
+    </Stack>
   );
 }

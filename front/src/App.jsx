@@ -3,19 +3,12 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Input from "./Input.jsx";
 import Initial from "./Initial.jsx";
+import { BarChart } from "@mui/x-charts";
 
 function App() {
   return (
     <div>
       <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/initial">初期画面</Link>
-            </li>
-          </ul>
-        </nav>
-
         <Routes>
           <Route path="/" element={<Initial />} />
           <Route path="/initial" element={<Initial />} />
@@ -23,7 +16,6 @@ function App() {
         </Routes>
       </Router>
     </div>
-    // <MuiTest />
   );
 }
 
