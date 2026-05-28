@@ -34,7 +34,6 @@ export default function Improve() {
     };
     weakPoint();
   }, []);
-  console.log(new Date());
   return (
     <Box sx={{ width: 650 }}>
       <Box>
