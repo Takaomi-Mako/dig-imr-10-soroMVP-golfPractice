@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "test": "mocha --require test/setup.js",
     "dev-build": "cd front && npm install && npm run build && rm -rf ../public && cp -r dist ../public",
     "build": "npm install && knex migrate:rollback --all && npm run db:migrate && npm run db:seed",
     "db:migrate": "knex migrate:latest --",
@@ -25,8 +26,9 @@
     "pg": "^8.21.0"
   },
   "devDependencies": {
-    "chai": "^6.2.2",
-    "chai-http": "^5.1.2",
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.8.2",
     "nodemon": "^3.1.14"
   }
 }

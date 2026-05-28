@@ -20,15 +20,15 @@ function setupServer() {
       "*",
     ]);
 
+    const insertMissData = [];
     for (const ele of data.miss) {
       const missData = {
         practice_id: insertPracticeData[0].id,
         miss: ele,
       };
-      const result = await knex("miss").insert(missData, ["*"]);
-      console.log(result);
+      insertMissData.push(await knex("miss").insert(missData, ["*"]));
     }
-    res.send("OK");
+    res.send([insertPracticeData, insertMissData]);
   });
 
   app.get("/api/improve", async (req, res) => {
